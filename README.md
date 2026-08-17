@@ -25,7 +25,7 @@ I also introduce the *Perturbation-to-Attention (P2A) stress-test*, a deployable
 
 1. *Clone the repository:*
    
-   git clone https://github.com/LanreOyeleke/semantic-drift.git
+   git clone https://github.com/LanreOyeleke/Semantic-drift.git
    
    
 
@@ -68,6 +68,7 @@ else:
 from src.evaluation.metrics import calculate_delta_p
 
 result = calculate_delta_p(
+    
     model=model,
     tokenizer=tokenizer,
     query="What year did the Berlin Wall fall?",
@@ -106,9 +107,6 @@ pragmatic-drift/
 └── README.md              # This file
 
 
-## 📝 License
-
-This project is licensed under the MIT License.
 
 ## 📧 Contact
 
