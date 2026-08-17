@@ -6,13 +6,13 @@
 
 This repository contains the official implementation for the research project:
 
-> *"Semantic Drift and Context Boundaries: Evaluating 'Translation in the Wild' Within High-Dimensional RAG Architectures"*
+> **"Semantic Drift and Context Boundaries: Evaluating 'Translation in the Wild' Within High-Dimensional RAG Architectures"**
 
 ## 📄 Overview
 
-Large Language Models (LLMs) frequently hallucinate even when given the correct retrieved documents. This project formalizes *Pragmatic Drift (δp)*—a metric that measures how much an LLM's reasoning shifts when its system instructions are perturbed. High δp indicates fragile reasoning and predicts hallucinations.
+Large Language Models (LLMs) frequently hallucinate even when given the correct retrieved documents. This project formalizes **Pragmatic Drift (δp)**—a metric that measures how much an LLM's reasoning shifts when its system instructions are perturbed. High δp indicates fragile reasoning and predicts hallucinations.
 
-I also introduce the *Perturbation-to-Attention (P2A) stress-test*, a deployable guardrail that intercepts unstable contexts before they reach the end-user.
+We also introduce the **Perturbation-to-Attention (P2A) stress-test**, a deployable guardrail that intercepts unstable contexts before they reach the end-user.
 
 ## 🚀 Quick Start
 
@@ -23,26 +23,28 @@ I also introduce the *Perturbation-to-Attention (P2A) stress-test*, a deployable
 
 ### Installation
 
-1. *Clone the repository:*
-   
-   git clone https://github.com/LanreOyeleke/Semantic-drift.git
-   
-   
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/LanreOyeleke/Pragmatic-Drift.git
+   cd Pragmatic-Drift
+   ```
 
-3. *Create a virtual environment (recommended):*
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   
+2. **Create a virtual environment (recommended):**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-5. *Install dependencies:*
+3. **Install dependencies:**
+   ```bash
    pip install -r requirements.txt
-   
+   ```
 
 ## 🧠 Usage Examples
 
 ### Using the P2A Guardrail
 
-
+```python
 from src.evaluation.metrics import p2a_stress_test
 
 result = p2a_stress_test(
@@ -61,14 +63,14 @@ if result['status'] == 'REJECT':
     print("⚠️ Unstable context detected. Returning safe fallback.")
 else:
     print("✅ Context stable. Proceeding with generation.")
-
+```
 
 ### Calculating δp
 
+```python
 from src.evaluation.metrics import calculate_delta_p
 
 result = calculate_delta_p(
-    
     model=model,
     tokenizer=tokenizer,
     query="What year did the Berlin Wall fall?",
@@ -78,38 +80,47 @@ result = calculate_delta_p(
 )
 
 print(f"δp = {result['drift']:.3f}")
-
-
 ```
+
 ## 📊 Key Results
 
 | Model | Position | Baseline Accuracy | Accuracy with Guardrail | Hallucination Reduction |
 | :--- | :--- | :--- | :--- | :--- |
-| Llama-3 | Middle | 52% | 81% | *+29%* |
-| Mistral | Middle | 58% | 84% | *+26%* |
+| Llama-3 | Middle | 52% | 81% | **+29%** |
+| Mistral | Middle | 58% | 84% | **+26%** |
 
-*Overall hallucination reduction: 38%* (at a 15% rejection rate)
+
+
+### Figures
+
+| Figure | Description |
+| :--- | :--- |
+| **Figure 1** | Positional sensitivity of δp (U-shaped curve, mirroring the "lost-in-the-middle" phenomenon) |
+| **Figure 2** | Correlation between δp and hallucination severity (r = -0.96, p < 0.001) |
 
 ## 📁 Repository Structure
 
-
-pragmatic-drift/
+```
+Pragmatic-Drift/
 ├── configs/               # Configuration files
 ├── data/                  # Data (or scripts to download it)
+├── notebooks/             # Jupyter notebooks for exploration
 ├── src/                   # All source code
+│   ├── data/              # Data loading and preprocessing
 │   ├── evaluation/        # δp and P2A metrics
-│   │   └── metrics.py
-│   └── experiments/       # Benchmark scripts
-│       └── run_benchmark.py
+│   ├── experiments/       # Benchmark scripts
+│   └── utils/             # Utility functions
 ├── tests/                 # Unit tests
 ├── results/               # Generated results and figures
 ├── requirements.txt       # Python dependencies
 └── README.md              # This file
+```
 
 
 
 ## 📧 Contact
 
-Author: Lanre Oyeleke
-Email: LanreOyeleke@uga.edu
-GitHub: https://github.com/LanreOyeleke
+**Author:** Lanre Oyeleke
+**Email:** [LanreOyeleke@uga.edu]
+**GitHub:** (https://github.com/LanreOyeleke)
+
